@@ -12,6 +12,7 @@ loop:
     xor t0, t0, t2 # sum = sum ^ a[i]
     addi a0, a0, 4 # add a0
     addi t1, t1, 1 # add index
+    
 
     blt t1, a1, loop # if i < n, continue the loop
 
