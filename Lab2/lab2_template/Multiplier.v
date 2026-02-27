@@ -6,20 +6,26 @@ module Multiplier(
     // TODO: implement Multiplier here
     // Note: Do NOT use built-in operator * here.
 
+
     reg signed [64:0] acc;
-    assign P = ; // assign answer
+    assign P = acc[64:1]; // assign answer
 
     always @(*) begin
         // TODO
         
-        acc = ; // init acc
+        acc = {32'd0, B, 1'b0}; // init acc
         for (int i = 0; i < 32; i += 1) begin
-            case () // booth algo operation
-                2'b10: ;
-                2'b01: ;
+            case (acc[1:0]) // booth algo operation
+                2'b10: begin
+                    acc[64:33] = acc[64:33] - A;
+                end
+                2'b01: begin
+                    acc[64:33] = acc[64:33] + A;
+                end
                 default: ;
             endcase
-            acc = ; // update acc
+             // update acc
+            acc = $signed(acc) >>> 1;
         end
 
     end
