@@ -8,6 +8,6 @@ module Mux2to1 #(
     output signed [size-1:0] out
 );
     // TODO: implement your 2to1 multiplexer here
-
+    assign out = sel ? s1 : s0;
 endmodule
 

@@ -8,6 +8,8 @@ module Adder (
 
     // TODO: implement your Adder here
     // Hint: you can use operator to implement
+    
+    assign sum = a + b;
 
 
 

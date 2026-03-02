@@ -15,7 +15,44 @@ module ALU (
 
             4'b0010: ALUOut = A + B; 
             //Implement other ALU operations
-            default : ALUOut = 32'b0;
+            
+            4'b0110: begin  // SUB
+                ALUOut = A - B;
+                zero = ALUOut == 0 ? 1 : 0;
+
+            end
+            4'b0001: begin  // OR
+                ALUOut = A | B;
+                zero = ALUOut == 0 ? 1 : 0;
+            end
+            4'b0000: begin  // AND
+                ALUOut = A & B;
+                zero = ALUOut == 0 ? 1 : 0;
+            end
+            4'b0111: begin  // SLT
+                ALUOut = A < B ? 1 : 0;
+                zero = ALUOut == 0 ? 1 : 0;
+            end
+            4'b1001: begin  // XOR
+                ALUOut = A ^ B;
+                zero = ALUOut == 0 ? 1 : 0;
+            end
+            4'b1010: begin  // SLL
+                ALUOut = A << B[4:0]; 
+                zero = ALUOut == 0 ? 1 : 0;
+            end
+            4'b1100: begin// SRL
+                ALUOut = A >> B[4:0];
+                zero = ALUOut == 0 ? 1 : 0;
+            end
+            4'b1011: begin// SRA
+                ALUOut = A >>> B[4:0];
+                zero = ALUOut == 0 ? 1 : 0;
+            end
+            default : begin
+                ALUOut = 32'b0;
+                zero = 0;
+            end
         
         endcase
     end
