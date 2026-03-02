@@ -14,12 +14,65 @@ module SingleCycleCPU (
 // The following provides simple template,
 // you can modify it as you wish except I/O pin and register module
 
+//m_PC
+wire [31:0] m_PC_pc_o;
+
+//m_Adder_1
+wire [31:0] m_Adder_1_sum;
+
+//m_InstMem
+wire [31:0] m_InstMem_inst;
+
+//m_Control
+wire m_Control_memRead,
+    m_Control_memWrite,
+    m_Control_ALUSrc,
+    m_Control_regWrite;
+wire [1:0] m_Control_memtoReg,
+            m_Control_ALUOp,
+            m_Control_ALUSrc;
+
+//m_Register
+wire [31:0] m_Register_readData1,
+            m_Register_readData2;
+
+//m_BranchComp
+wire m_BranchComp_BrEq,
+    m_BranchComp_BrLT;
+
+//m_ImmGen
+wire [31:0] m_ImmGen_imm;
+
+//m_ShiftLeftOne
+wire [31:0] m_ShiftLeftOne_o;
+
+//m_Adder2
+wire [31:0] m_Adder2_sum;
+
+//m_Mux_PC
+wire [31:0] m_Mux_PC_out;
+
+//m_Mux_ALU
+wire [31:0] m_Mux_ALU_out;
+
+//m_ALUCtrl
+wire [3:0] m_ALUCtrl_ALUCtl;
+
+//m_ALU
+wire [31:0] m_ALU_ALUOut;
+wire m_ALU_zero;
+
+//m_DataMemory
+wire [31:0] m_DataMemory_readData;
+
+//m_Mux_WriteData
+wire [31:0] m_Mux_WriteData_out;
 
 PC m_PC(
-    .clk(),
-    .rst(),
-    .pc_i(),
-    .pc_o()
+    .clk(clk),
+    .rst(start),
+    .pc_i(m_Mux_PC_out),
+    .pc_o(m_PC_pc_o)
 );
 
 Adder m_Adder_1(
