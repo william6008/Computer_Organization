@@ -49,6 +49,7 @@ module ALUCtrl (
                     endcase
 
             // Todo: implement other ALUOp cases
+            default: ALUCtl = 4'bxxxx
         endcase
     end
 
