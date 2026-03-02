@@ -14,25 +14,39 @@ module ALUCtrl (
     // ALUOp = 2'b01, funct3 = 3'b000,
     always @(*) begin
         case(ALUOp)
-            2'b11: // R-type instructions
+            2'b10 : case({funct7,funct3})   //R-type
+                        // TODO
+                        {1'b0, 3'b000}:  // ADD
+                            ALUCtl = 4'b0010;
+                        {1'b1, 3'b000}:  // SUB
+                            ALUCtl = 4'b0110;
+                        {1'b0, 3'b110}:  // OR
+                            ALUCtl = 4'b0001;
+                        {1'b0, 3'b111}:  // AND
+                            ALUCtl = 4'b0000;
+                        {1'b0, 3'b010}:  // SLT
+                            ALUCtl = 4'b0111;
+                        {1'b0, 3'b100}:  // XOR
+                            ALUCtl = 4'b1001;
+                        {1'b0, 3'b001}:  // SLL
+                            ALUCtl = 4'b1010;
+                        {1'b0, 3'b101}:  // SRL
+                            ALUCtl = 4'b1100;
+                        {1'b1, 3'b101}:  // SRA
+                            ALUCtl = 4'b1011;
 
-                case({funct3, funct7})
-
-                    {3'b000, 1'b0}: ALUCtl = 4'b0010; //You can design your ALU control signals
-                    // Implement other R-type instructions
-                    default: ALUCtl = 4'bxxxx;
-
-                endcase
-
-            2'b01: // I-type instructions
-
-                case(funct3)
-
-                    3'b000: ALUCtl = 4'b0010; 
-                    // Implement other I-type instructions
-                    default: ALUCtl = 4'bxxxx;
-
-                endcase
+                        default: ALUCtl = 4'bxxxx;
+                    endcase
+            2'b11 : case(funct3)            //I-type
+                        // TODO
+                        3'b000: ALUCtl = 4'b0010; // ADDI
+                        3'b110: ALUCtl = 4'b0001; // ORI
+                        3'b111: ALUCtl = 4'b0000; // ANDI
+                        3'b010: ALUCtl = 4'b0111; // SLTI
+                        3'b100: ALUCtl = 4'b1001; // XORI
+                        3'b001: ALUCtl = 4'b1010; // SLLI
+                        default: ALUCtl = 4'bxxxx;
+                    endcase
 
             // Todo: implement other ALUOp cases
         endcase
