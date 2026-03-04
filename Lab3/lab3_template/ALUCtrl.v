@@ -14,7 +14,7 @@ module ALUCtrl (
     // ALUOp = 2'b01, funct3 = 3'b000,
     always @(*) begin
         case(ALUOp)
-            2'b10 : case({funct7,funct3})   //R-type
+            2'b11 : case({funct7,funct3})   //R-type
                         // TODO
                         {1'b0, 3'b000}:  // ADD
                             ALUCtl = 4'b0010;
@@ -37,7 +37,7 @@ module ALUCtrl (
 
                         default: ALUCtl = 4'bxxxx;
                     endcase
-            2'b11 : case(funct3)            //I-type
+            2'b01 : case(funct3)            //I-type
                         // TODO
                         3'b000: ALUCtl = 4'b0010; // ADDI
                         3'b110: ALUCtl = 4'b0001; // ORI
@@ -47,9 +47,11 @@ module ALUCtrl (
                         3'b001: ALUCtl = 4'b1010; // SLLI
                         default: ALUCtl = 4'bxxxx;
                     endcase
+            2'b00 : ALUCtl = 4'b0010 // lw, sw, jalr, auipc
+            
 
             // Todo: implement other ALUOp cases
-            default: ALUCtl = 4'bxxxx
+            default: ALUCtl = 4'bxxxx;
         endcase
     end
 
