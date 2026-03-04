@@ -17,8 +17,9 @@ module Control (
     reg [9:0] ctrl_signals;
     assign {PCSel, memRead, memtoReg, ALUOp, memWrite, ALUSrc, regWrite} = ctrl_signals;
     reg branch;
-    
+
     always @(*) begin
+        branch = 1'b0;
         case(opcode)
 
             7'b0110011: ctrl_signals = 10'b00_0_00_11_0_0_1; // R-type

@@ -76,7 +76,7 @@ PC m_PC(
 );
 
 Adder m_Adder_1(
-    .a({{29{1'b0}}, 3'b100}),
+    .a(32'd4),
     .b(m_PC_pc_o),
     .sum(m_Adder_1_sum)
 );
@@ -112,7 +112,7 @@ Register m_Register(
     .readReg1(m_InstMem_inst[19:15]),
     .readReg2(m_InstMem_inst[24:20]),
     .writeReg(m_InstMem_inst[11:7]),
-    .writeData(m_Mux_ALU_out),
+    .writeData(m_Mux_WriteData_out),
     .readData1(m_Register_readData1),
     .readData2(m_Register_readData2)
 );

@@ -47,7 +47,7 @@ module ALUCtrl (
                         3'b001: ALUCtl = 4'b1010; // SLLI
                         default: ALUCtl = 4'bxxxx;
                     endcase
-            2'b00 : ALUCtl = 4'b0010 // lw, sw, jalr, auipc
+            2'b00 : ALUCtl = 4'b0010; // lw, sw, jalr, auipc
             
 
             // Todo: implement other ALUOp cases

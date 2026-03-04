@@ -11,6 +11,7 @@ module ALU (
     // Hint: you can use operator to implement
 
     always @(*) begin
+        zero = 1'b0;
         case(ALUctl)
 
             4'b0010: ALUOut = A + B; 
