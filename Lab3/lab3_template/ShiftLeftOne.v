@@ -4,8 +4,7 @@ module ShiftLeftOne (
 );
 
     // TODO: implement your shift left 1 here
-    //assign o = {i[30:0], 1'b0};
-    assign o = i;
+    assign o = {i[30:0], 1'b0};
 
 
 endmodule

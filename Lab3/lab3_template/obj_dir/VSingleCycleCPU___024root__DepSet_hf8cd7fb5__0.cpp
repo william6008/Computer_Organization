@@ -103,18 +103,19 @@ VL_INLINE_OPT void VSingleCycleCPU___024root___nba_sequent__TOP__0(VSingleCycleC
                                                        (((- (IData)(
                                                                     (vlSelf->SingleCycleCPU__DOT__m_InstMem_inst 
                                                                      >> 0x1fU))) 
-                                                         << 0x15U) 
-                                                        | ((0x100000U 
+                                                         << 0x14U) 
+                                                        | ((0x80000U 
                                                             & (vlSelf->SingleCycleCPU__DOT__m_InstMem_inst 
-                                                               >> 0xbU)) 
-                                                           | ((0xff000U 
-                                                               & vlSelf->SingleCycleCPU__DOT__m_InstMem_inst) 
-                                                              | ((0x800U 
+                                                               >> 0xcU)) 
+                                                           | ((0x7f800U 
+                                                               & (vlSelf->SingleCycleCPU__DOT__m_InstMem_inst 
+                                                                  >> 1U)) 
+                                                              | ((0x400U 
                                                                   & (vlSelf->SingleCycleCPU__DOT__m_InstMem_inst 
-                                                                     >> 9U)) 
-                                                                 | (0x7feU 
+                                                                     >> 0xaU)) 
+                                                                 | (0x3ffU 
                                                                     & (vlSelf->SingleCycleCPU__DOT__m_InstMem_inst 
-                                                                       >> 0x14U))))))
+                                                                       >> 0x15U))))))
                                                         : 0U)
                                                        : 0U)
                                                       : 0U)
@@ -146,19 +147,19 @@ VL_INLINE_OPT void VSingleCycleCPU___024root___nba_sequent__TOP__0(VSingleCycleC
                                                        (((- (IData)(
                                                                     (vlSelf->SingleCycleCPU__DOT__m_InstMem_inst 
                                                                      >> 0x1fU))) 
-                                                         << 0xdU) 
-                                                        | ((0x1000U 
+                                                         << 0xcU) 
+                                                        | ((0x800U 
                                                             & (vlSelf->SingleCycleCPU__DOT__m_InstMem_inst 
-                                                               >> 0x13U)) 
-                                                           | ((0x800U 
+                                                               >> 0x14U)) 
+                                                           | ((0x400U 
                                                                & (vlSelf->SingleCycleCPU__DOT__m_InstMem_inst 
-                                                                  << 4U)) 
-                                                              | ((0x7e0U 
+                                                                  << 3U)) 
+                                                              | ((0x3f0U 
                                                                   & (vlSelf->SingleCycleCPU__DOT__m_InstMem_inst 
-                                                                     >> 0x14U)) 
-                                                                 | (0x1eU 
+                                                                     >> 0x15U)) 
+                                                                 | (0xfU 
                                                                     & (vlSelf->SingleCycleCPU__DOT__m_InstMem_inst 
-                                                                       >> 7U))))))
+                                                                       >> 8U))))))
                                                         : 0U)
                                                        : 0U))))
                                                    : 0U)
@@ -710,8 +711,9 @@ VL_INLINE_OPT void VSingleCycleCPU___024root___nba_comb__TOP__0(VSingleCycleCPU_
                                                     & ((IData)(vlSelf->SingleCycleCPU__DOT__m_Control__DOT__ctrl_signals) 
                                                        >> 8U)))
                                                    ? 
-                                                  (vlSelf->SingleCycleCPU__DOT__m_ImmGen_imm 
-                                                   + vlSelf->SingleCycleCPU__DOT__m_PC_pc_o)
+                                                  (vlSelf->SingleCycleCPU__DOT__m_PC_pc_o 
+                                                   + 
+                                                   VL_SHIFTL_III(32,32,32, vlSelf->SingleCycleCPU__DOT__m_ImmGen_imm, 1U))
                                                    : 
                                                   ((2U 
                                                     == 
