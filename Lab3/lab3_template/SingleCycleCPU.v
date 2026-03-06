@@ -68,6 +68,13 @@ wire [31:0] m_DataMemory_readData;
 //m_Mux_WriteData
 wire [31:0] m_Mux_WriteData_out;
 
+Mux2to1 m_MUX_ALU_in(
+    .sel(),
+    .s0(),
+    .s1(),
+    .out()
+)
+
 PC m_PC(
     .clk(clk),
     .rst(start),
