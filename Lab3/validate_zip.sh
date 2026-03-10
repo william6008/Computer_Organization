@@ -28,18 +28,18 @@ if [ ! -f "$ZIP_FILE" ]; then
     exit 1
 fi
 
-EXTRACT_DIR="/tmp/lab2_extract"
+EXTRACT_DIR="/tmp/lab3_extract"
 
 rm -rf "$EXTRACT_DIR"
 mkdir -p "$EXTRACT_DIR"
 
 unzip -q "$ZIP_FILE" -d "$EXTRACT_DIR"
 
-STUDENT_ID=$(basename "$ZIP_FILE" .zip | sed 's/^lab2_//')
+STUDENT_ID=$(basename "$ZIP_FILE" .zip | sed 's/^lab3_//')
 
-LAB_DIR="$EXTRACT_DIR/lab2_$STUDENT_ID"
+LAB_DIR="$EXTRACT_DIR/lab3_$STUDENT_ID"
 if [ ! -d "$LAB_DIR" ]; then
-    echo "Error: Directory lab2_$STUDENT_ID not found in the zip file."
+    echo "Error: Directory lab3_$STUDENT_ID not found in the zip file."
     exit 1
 fi
 

@@ -26,7 +26,8 @@ wire [31:0] m_InstMem_inst;
 //m_Control
 wire m_Control_memRead,
     m_Control_memWrite,
-    m_Control_ALUSrc,
+    m_Control_ALUSrcA,
+    m_Control_ALUSrcB,
     m_Control_regWrite;
 wire [1:0] m_Control_memtoReg,
             m_Control_ALUOp,
@@ -52,8 +53,11 @@ wire [31:0] m_Adder_2_sum;
 //m_Mux_PC
 wire [31:0] m_Mux_PC_out;
 
-//m_Mux_ALU
-wire [31:0] m_Mux_ALU_out;
+//m_Mux_ALU_A
+wire [31:0] m_Mux_ALU_out_A;
+
+//m_Mux_ALU_B
+wire [31:0] m_Mux_ALU_out_B;
 
 //m_ALUCtrl
 wire [3:0] m_ALUCtrl_ALUCtl;
@@ -68,12 +72,12 @@ wire [31:0] m_DataMemory_readData;
 //m_Mux_WriteData
 wire [31:0] m_Mux_WriteData_out;
 
-Mux2to1 m_MUX_ALU_in(
-    .sel(),
-    .s0(),
-    .s1(),
-    .out()
-)
+Mux2to1 m_MUX_ALU_A(
+    .sel(m_Control_ALUSrcA),
+    .s0(m_Register_readData1),
+    .s1(m_PC_pc_o),
+    .out(m_Mux_ALU_out_A)
+);
 
 PC m_PC(
     .clk(clk),
@@ -103,9 +107,10 @@ Control m_Control(
     .memtoReg(m_Control_memtoReg),
     .ALUOp(m_Control_ALUOp),
     .memWrite(m_Control_memWrite),
-    .ALUSrc(m_Control_ALUSrc),
+    .ALUSrcA(m_Control_ALUSrcA),
     .regWrite(m_Control_regWrite),
-    .PCSel(m_Control_PCSel)
+    .PCSel(m_Control_PCSel),
+    .ALUSrcB(m_Control_ALUSrcB)
 );
 
 // For Student:
@@ -162,11 +167,11 @@ Mux3to1 #(.size(32)) m_Mux_PC(
 );
 
 
-Mux2to1 #(.size(32)) m_Mux_ALU(
-    .sel(m_Control_ALUSrc),
+Mux2to1 #(.size(32)) m_Mux_ALU_B(
+    .sel(m_Control_ALUSrcB),
     .s0(m_Register_readData2),
     .s1(m_ImmGen_imm),
-    .out(m_Mux_ALU_out)
+    .out(m_Mux_ALU_out_B)
 );
 
 ALUCtrl m_ALUCtrl(
@@ -178,8 +183,8 @@ ALUCtrl m_ALUCtrl(
 
 ALU m_ALU(
     .ALUctl(m_ALUCtrl_ALUCtl),
-    .A(m_Register_readData1),
-    .B(m_Mux_ALU_out),
+    .A(m_Mux_ALU_out_A),
+    .B(m_Mux_ALU_out_B),
     .ALUOut(m_ALU_ALUOut),
     .zero(m_ALU_zero)
 );

@@ -24,7 +24,7 @@ VL_INLINE_OPT void VSingleCycleCPU___024root___nba_sequent__TOP__0(VSingleCycleC
     vlSelf->__Vdlyvset__SingleCycleCPU__DOT__m_DataMemory__DOT__data_memory__v0 = 0U;
     vlSelf->__Vdlyvset__SingleCycleCPU__DOT__m_DataMemory__DOT__data_memory__v4 = 0U;
     if (vlSelf->start) {
-        if ((4U & (IData)(vlSelf->SingleCycleCPU__DOT__m_Control__DOT__ctrl_signals))) {
+        if ((8U & (IData)(vlSelf->SingleCycleCPU__DOT__m_Control__DOT__ctrl_signals))) {
             vlSelf->__Vdlyvval__SingleCycleCPU__DOT__m_DataMemory__DOT__data_memory__v0 
                 = (vlSelf->SingleCycleCPU__DOT__m_Register_readData2 
                    >> 0x18U);
@@ -275,7 +275,7 @@ VL_INLINE_OPT void VSingleCycleCPU___024root___nba_sequent__TOP__1(VSingleCycleC
     __Vdlyvset__SingleCycleCPU__DOT__m_Register__DOT__regs__v0 = 0U;
     __Vdlyvset__SingleCycleCPU__DOT__m_Register__DOT__regs__v1 = 0U;
     if (vlSelf->start) {
-        if ((1U & (IData)(vlSelf->SingleCycleCPU__DOT__m_Control__DOT__ctrl_signals))) {
+        if ((2U & (IData)(vlSelf->SingleCycleCPU__DOT__m_Control__DOT__ctrl_signals))) {
             __Vdlyvval__SingleCycleCPU__DOT__m_Register__DOT__regs__v0 
                 = ((0U == (IData)(vlSelf->SingleCycleCPU__DOT____Vcellinp__m_Register__writeReg))
                     ? 0U : vlSelf->SingleCycleCPU__DOT__m_Mux_WriteData_out);
@@ -485,13 +485,13 @@ VL_INLINE_OPT void VSingleCycleCPU___024root___nba_comb__TOP__0(VSingleCycleCPU_
                     = ((4U & (IData)(vlSelf->SingleCycleCPU__DOT____Vcellinp__m_Control__opcode))
                         ? ((2U & (IData)(vlSelf->SingleCycleCPU__DOT____Vcellinp__m_Control__opcode))
                             ? ((1U & (IData)(vlSelf->SingleCycleCPU__DOT____Vcellinp__m_Control__opcode))
-                                ? 0x141U : 0U) : 0U)
+                                ? 0x282U : 0U) : 0U)
                         : 0U);
             } else if ((4U & (IData)(vlSelf->SingleCycleCPU__DOT____Vcellinp__m_Control__opcode))) {
                 vlSelf->SingleCycleCPU__DOT__m_Control__DOT__ctrl_signals 
                     = ((2U & (IData)(vlSelf->SingleCycleCPU__DOT____Vcellinp__m_Control__opcode))
                         ? ((1U & (IData)(vlSelf->SingleCycleCPU__DOT____Vcellinp__m_Control__opcode))
-                            ? 0x243U : 0U) : 0U);
+                            ? 0x486U : 0U) : 0U);
             } else if ((2U & (IData)(vlSelf->SingleCycleCPU__DOT____Vcellinp__m_Control__opcode))) {
                 if ((1U & (IData)(vlSelf->SingleCycleCPU__DOT____Vcellinp__m_Control__opcode))) {
                     if ((4U & (IData)(vlSelf->SingleCycleCPU__DOT____Vcellinp__m_Control__funct3))) {
@@ -513,7 +513,7 @@ VL_INLINE_OPT void VSingleCycleCPU___024root___nba_comb__TOP__0(VSingleCycleCPU_
                     }
                     vlSelf->SingleCycleCPU__DOT__m_Control__DOT__ctrl_signals 
                         = ((IData)(vlSelf->SingleCycleCPU__DOT__m_Control__DOT__branch)
-                            ? 0x100U : 0U);
+                            ? 0x200U : 0U);
                 } else {
                     vlSelf->SingleCycleCPU__DOT__m_Control__DOT__ctrl_signals = 0U;
                 }
@@ -531,14 +531,14 @@ VL_INLINE_OPT void VSingleCycleCPU___024root___nba_comb__TOP__0(VSingleCycleCPU_
                         ? 0U : ((4U & (IData)(vlSelf->SingleCycleCPU__DOT____Vcellinp__m_Control__opcode))
                                  ? 0U : ((2U & (IData)(vlSelf->SingleCycleCPU__DOT____Vcellinp__m_Control__opcode))
                                           ? ((1U & (IData)(vlSelf->SingleCycleCPU__DOT____Vcellinp__m_Control__opcode))
-                                              ? 0x19U
+                                              ? 0x32U
                                               : 0U)
                                           : 0U))) : 
                    ((8U & (IData)(vlSelf->SingleCycleCPU__DOT____Vcellinp__m_Control__opcode))
                      ? 0U : ((4U & (IData)(vlSelf->SingleCycleCPU__DOT____Vcellinp__m_Control__opcode))
                               ? 0U : ((2U & (IData)(vlSelf->SingleCycleCPU__DOT____Vcellinp__m_Control__opcode))
                                        ? ((1U & (IData)(vlSelf->SingleCycleCPU__DOT____Vcellinp__m_Control__opcode))
-                                           ? 6U : 0U)
+                                           ? 0xcU : 0U)
                                        : 0U)))) : (
                                                    (0x10U 
                                                     & (IData)(vlSelf->SingleCycleCPU__DOT____Vcellinp__m_Control__opcode))
@@ -555,7 +555,7 @@ VL_INLINE_OPT void VSingleCycleCPU___024root___nba_comb__TOP__0(VSingleCycleCPU_
                                                        ? 
                                                       ((1U 
                                                         & (IData)(vlSelf->SingleCycleCPU__DOT____Vcellinp__m_Control__opcode))
-                                                        ? 3U
+                                                        ? 7U
                                                         : 0U)
                                                        : 0U)
                                                       : 
@@ -564,7 +564,7 @@ VL_INLINE_OPT void VSingleCycleCPU___024root___nba_comb__TOP__0(VSingleCycleCPU_
                                                        ? 
                                                       ((1U 
                                                         & (IData)(vlSelf->SingleCycleCPU__DOT____Vcellinp__m_Control__opcode))
-                                                        ? 0xbU
+                                                        ? 0x16U
                                                         : 0U)
                                                        : 0U)))
                                                     : 
@@ -581,17 +581,20 @@ VL_INLINE_OPT void VSingleCycleCPU___024root___nba_comb__TOP__0(VSingleCycleCPU_
                                                        ? 
                                                       ((1U 
                                                         & (IData)(vlSelf->SingleCycleCPU__DOT____Vcellinp__m_Control__opcode))
-                                                        ? 0xa3U
+                                                        ? 0x146U
                                                         : 0U)
                                                        : 0U)))));
     }
     vlSelf->SingleCycleCPU__DOT__m_Control_memRead 
         = (1U & ((IData)(vlSelf->SingleCycleCPU__DOT__m_Control__DOT__ctrl_signals) 
-                 >> 7U));
-    vlSelf->SingleCycleCPU__DOT__m_Mux_ALU_out = ((2U 
-                                                   & (IData)(vlSelf->SingleCycleCPU__DOT__m_Control__DOT__ctrl_signals))
-                                                   ? vlSelf->SingleCycleCPU__DOT__m_ImmGen_imm
-                                                   : vlSelf->SingleCycleCPU__DOT__m_Register_readData2);
+                 >> 8U));
+    vlSelf->SingleCycleCPU__DOT__m_Mux_ALU_out_A = 
+        ((1U & (IData)(vlSelf->SingleCycleCPU__DOT__m_Control__DOT__ctrl_signals))
+          ? vlSelf->SingleCycleCPU__DOT__m_PC_pc_o : vlSelf->SingleCycleCPU__DOT__m_Register_readData1);
+    vlSelf->SingleCycleCPU__DOT__m_Mux_ALU_out_B = 
+        ((4U & (IData)(vlSelf->SingleCycleCPU__DOT__m_Control__DOT__ctrl_signals))
+          ? vlSelf->SingleCycleCPU__DOT__m_ImmGen_imm
+          : vlSelf->SingleCycleCPU__DOT__m_Register_readData2);
     __Vtableidx1 = (((IData)(vlSelf->SingleCycleCPU__DOT____Vcellinp__m_Control__funct3) 
                      << 3U) | ((0xffffffcU & (((0x80U 
                                                 > vlSelf->SingleCycleCPU__DOT__m_PC_pc_o) 
@@ -599,7 +602,7 @@ VL_INLINE_OPT void VSingleCycleCPU___024root___nba_comb__TOP__0(VSingleCycleCPU_
                                               & ((IData)(vlSelf->__VdfgTmp_h97e7b328__0) 
                                                  >> 4U))) 
                                | (3U & ((IData)(vlSelf->SingleCycleCPU__DOT__m_Control__DOT__ctrl_signals) 
-                                        >> 3U))));
+                                        >> 4U))));
     vlSelf->SingleCycleCPU__DOT__m_ALUCtrl_ALUCtl = 
         VSingleCycleCPU__ConstPool__TABLE_hee451926_0
         [__Vtableidx1];
@@ -614,8 +617,8 @@ VL_INLINE_OPT void VSingleCycleCPU___024root___nba_comb__TOP__0(VSingleCycleCPU_
                 vlSelf->SingleCycleCPU__DOT__m_ALU_zero = 0U;
             } else {
                 vlSelf->SingleCycleCPU__DOT__m_ALU_ALUOut 
-                    = (vlSelf->SingleCycleCPU__DOT__m_Register_readData1 
-                       >> (0x1fU & vlSelf->SingleCycleCPU__DOT__m_Mux_ALU_out));
+                    = (vlSelf->SingleCycleCPU__DOT__m_Mux_ALU_out_A 
+                       >> (0x1fU & vlSelf->SingleCycleCPU__DOT__m_Mux_ALU_out_B));
                 vlSelf->SingleCycleCPU__DOT__m_ALU_zero 
                     = ((0U == vlSelf->SingleCycleCPU__DOT__m_ALU_ALUOut)
                         ? 1U : 0U);
@@ -623,23 +626,23 @@ VL_INLINE_OPT void VSingleCycleCPU___024root___nba_comb__TOP__0(VSingleCycleCPU_
         } else if ((2U & (IData)(vlSelf->SingleCycleCPU__DOT__m_ALUCtrl_ALUCtl))) {
             if ((1U & (IData)(vlSelf->SingleCycleCPU__DOT__m_ALUCtrl_ALUCtl))) {
                 vlSelf->SingleCycleCPU__DOT__m_ALU_ALUOut 
-                    = VL_SHIFTRS_III(32,32,5, vlSelf->SingleCycleCPU__DOT__m_Register_readData1, 
-                                     (0x1fU & vlSelf->SingleCycleCPU__DOT__m_Mux_ALU_out));
+                    = VL_SHIFTRS_III(32,32,5, vlSelf->SingleCycleCPU__DOT__m_Mux_ALU_out_A, 
+                                     (0x1fU & vlSelf->SingleCycleCPU__DOT__m_Mux_ALU_out_B));
                 vlSelf->SingleCycleCPU__DOT__m_ALU_zero 
                     = ((0U == vlSelf->SingleCycleCPU__DOT__m_ALU_ALUOut)
                         ? 1U : 0U);
             } else {
                 vlSelf->SingleCycleCPU__DOT__m_ALU_ALUOut 
-                    = (vlSelf->SingleCycleCPU__DOT__m_Register_readData1 
-                       << (0x1fU & vlSelf->SingleCycleCPU__DOT__m_Mux_ALU_out));
+                    = (vlSelf->SingleCycleCPU__DOT__m_Mux_ALU_out_A 
+                       << (0x1fU & vlSelf->SingleCycleCPU__DOT__m_Mux_ALU_out_B));
                 vlSelf->SingleCycleCPU__DOT__m_ALU_zero 
                     = ((0U == vlSelf->SingleCycleCPU__DOT__m_ALU_ALUOut)
                         ? 1U : 0U);
             }
         } else if ((1U & (IData)(vlSelf->SingleCycleCPU__DOT__m_ALUCtrl_ALUCtl))) {
             vlSelf->SingleCycleCPU__DOT__m_ALU_ALUOut 
-                = (vlSelf->SingleCycleCPU__DOT__m_Register_readData1 
-                   ^ vlSelf->SingleCycleCPU__DOT__m_Mux_ALU_out);
+                = (vlSelf->SingleCycleCPU__DOT__m_Mux_ALU_out_A 
+                   ^ vlSelf->SingleCycleCPU__DOT__m_Mux_ALU_out_B);
             vlSelf->SingleCycleCPU__DOT__m_ALU_zero 
                 = ((0U == vlSelf->SingleCycleCPU__DOT__m_ALU_ALUOut)
                     ? 1U : 0U);
@@ -651,15 +654,15 @@ VL_INLINE_OPT void VSingleCycleCPU___024root___nba_comb__TOP__0(VSingleCycleCPU_
         if ((2U & (IData)(vlSelf->SingleCycleCPU__DOT__m_ALUCtrl_ALUCtl))) {
             if ((1U & (IData)(vlSelf->SingleCycleCPU__DOT__m_ALUCtrl_ALUCtl))) {
                 vlSelf->SingleCycleCPU__DOT__m_ALU_ALUOut 
-                    = (VL_LTS_III(32, vlSelf->SingleCycleCPU__DOT__m_Register_readData1, vlSelf->SingleCycleCPU__DOT__m_Mux_ALU_out)
+                    = (VL_LTS_III(32, vlSelf->SingleCycleCPU__DOT__m_Mux_ALU_out_A, vlSelf->SingleCycleCPU__DOT__m_Mux_ALU_out_B)
                         ? 1U : 0U);
                 vlSelf->SingleCycleCPU__DOT__m_ALU_zero 
                     = ((0U == vlSelf->SingleCycleCPU__DOT__m_ALU_ALUOut)
                         ? 1U : 0U);
             } else {
                 vlSelf->SingleCycleCPU__DOT__m_ALU_ALUOut 
-                    = (vlSelf->SingleCycleCPU__DOT__m_Register_readData1 
-                       - vlSelf->SingleCycleCPU__DOT__m_Mux_ALU_out);
+                    = (vlSelf->SingleCycleCPU__DOT__m_Mux_ALU_out_A 
+                       - vlSelf->SingleCycleCPU__DOT__m_Mux_ALU_out_B);
                 vlSelf->SingleCycleCPU__DOT__m_ALU_zero 
                     = ((0U == vlSelf->SingleCycleCPU__DOT__m_ALU_ALUOut)
                         ? 1U : 0U);
@@ -674,13 +677,13 @@ VL_INLINE_OPT void VSingleCycleCPU___024root___nba_comb__TOP__0(VSingleCycleCPU_
             vlSelf->SingleCycleCPU__DOT__m_ALU_zero = 0U;
         } else {
             vlSelf->SingleCycleCPU__DOT__m_ALU_ALUOut 
-                = (vlSelf->SingleCycleCPU__DOT__m_Register_readData1 
-                   + vlSelf->SingleCycleCPU__DOT__m_Mux_ALU_out);
+                = (vlSelf->SingleCycleCPU__DOT__m_Mux_ALU_out_A 
+                   + vlSelf->SingleCycleCPU__DOT__m_Mux_ALU_out_B);
         }
     } else if ((1U & (IData)(vlSelf->SingleCycleCPU__DOT__m_ALUCtrl_ALUCtl))) {
         vlSelf->SingleCycleCPU__DOT__m_ALU_ALUOut = 
-            (vlSelf->SingleCycleCPU__DOT__m_Register_readData1 
-             | vlSelf->SingleCycleCPU__DOT__m_Mux_ALU_out);
+            (vlSelf->SingleCycleCPU__DOT__m_Mux_ALU_out_A 
+             | vlSelf->SingleCycleCPU__DOT__m_Mux_ALU_out_B);
         vlSelf->SingleCycleCPU__DOT__m_ALU_zero = (
                                                    (0U 
                                                     == vlSelf->SingleCycleCPU__DOT__m_ALU_ALUOut)
@@ -688,8 +691,8 @@ VL_INLINE_OPT void VSingleCycleCPU___024root___nba_comb__TOP__0(VSingleCycleCPU_
                                                     : 0U);
     } else {
         vlSelf->SingleCycleCPU__DOT__m_ALU_ALUOut = 
-            (vlSelf->SingleCycleCPU__DOT__m_Register_readData1 
-             & vlSelf->SingleCycleCPU__DOT__m_Mux_ALU_out);
+            (vlSelf->SingleCycleCPU__DOT__m_Mux_ALU_out_A 
+             & vlSelf->SingleCycleCPU__DOT__m_Mux_ALU_out_B);
         vlSelf->SingleCycleCPU__DOT__m_ALU_zero = (
                                                    (0U 
                                                     == vlSelf->SingleCycleCPU__DOT__m_ALU_ALUOut)
@@ -700,7 +703,7 @@ VL_INLINE_OPT void VSingleCycleCPU___024root___nba_comb__TOP__0(VSingleCycleCPU_
                                                   == 
                                                   (3U 
                                                    & ((IData)(vlSelf->SingleCycleCPU__DOT__m_Control__DOT__ctrl_signals) 
-                                                      >> 8U)))
+                                                      >> 9U)))
                                                   ? 
                                                  ((IData)(4U) 
                                                   + vlSelf->SingleCycleCPU__DOT__m_PC_pc_o)
@@ -709,7 +712,7 @@ VL_INLINE_OPT void VSingleCycleCPU___024root___nba_comb__TOP__0(VSingleCycleCPU_
                                                    == 
                                                    (3U 
                                                     & ((IData)(vlSelf->SingleCycleCPU__DOT__m_Control__DOT__ctrl_signals) 
-                                                       >> 8U)))
+                                                       >> 9U)))
                                                    ? 
                                                   (vlSelf->SingleCycleCPU__DOT__m_PC_pc_o 
                                                    + 
@@ -719,7 +722,7 @@ VL_INLINE_OPT void VSingleCycleCPU___024root___nba_comb__TOP__0(VSingleCycleCPU_
                                                     == 
                                                     (3U 
                                                      & ((IData)(vlSelf->SingleCycleCPU__DOT__m_Control__DOT__ctrl_signals) 
-                                                        >> 8U)))
+                                                        >> 9U)))
                                                     ? vlSelf->SingleCycleCPU__DOT__m_ALU_ALUOut
                                                     : 0U)));
 }
@@ -731,11 +734,11 @@ VL_INLINE_OPT void VSingleCycleCPU___024root___nba_comb__TOP__1(VSingleCycleCPU_
     // Body
     vlSelf->SingleCycleCPU__DOT__m_Mux_WriteData_out 
         = ((0U == (3U & ((IData)(vlSelf->SingleCycleCPU__DOT__m_Control__DOT__ctrl_signals) 
-                         >> 5U))) ? vlSelf->SingleCycleCPU__DOT__m_ALU_ALUOut
+                         >> 6U))) ? vlSelf->SingleCycleCPU__DOT__m_ALU_ALUOut
             : ((1U == (3U & ((IData)(vlSelf->SingleCycleCPU__DOT__m_Control__DOT__ctrl_signals) 
-                             >> 5U))) ? vlSelf->SingleCycleCPU__DOT__m_DataMemory_readData
+                             >> 6U))) ? vlSelf->SingleCycleCPU__DOT__m_DataMemory_readData
                 : ((2U == (3U & ((IData)(vlSelf->SingleCycleCPU__DOT__m_Control__DOT__ctrl_signals) 
-                                 >> 5U))) ? ((IData)(4U) 
+                                 >> 6U))) ? ((IData)(4U) 
                                              + vlSelf->SingleCycleCPU__DOT__m_PC_pc_o)
                     : 0U)));
 }

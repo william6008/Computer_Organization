@@ -42,7 +42,7 @@ class alignas(VL_CACHE_LINE_BYTES) VSingleCycleCPU___024root final : public Veri
     CData/*0:0*/ __Vtrigprevexpr___TOP__SingleCycleCPU__DOT__m_Control_memRead__0;
     CData/*0:0*/ __VactDidInit;
     CData/*0:0*/ __VactContinue;
-    SData/*9:0*/ SingleCycleCPU__DOT__m_Control__DOT__ctrl_signals;
+    SData/*10:0*/ SingleCycleCPU__DOT__m_Control__DOT__ctrl_signals;
     SData/*15:0*/ __VdfgTmp_hcc8674fb__0;
     IData/*31:0*/ SingleCycleCPU__DOT__m_PC_pc_o;
     IData/*31:0*/ SingleCycleCPU__DOT__m_InstMem_inst;
@@ -50,7 +50,8 @@ class alignas(VL_CACHE_LINE_BYTES) VSingleCycleCPU___024root final : public Veri
     IData/*31:0*/ SingleCycleCPU__DOT__m_Register_readData2;
     IData/*31:0*/ SingleCycleCPU__DOT__m_ImmGen_imm;
     IData/*31:0*/ SingleCycleCPU__DOT__m_Mux_PC_out;
-    IData/*31:0*/ SingleCycleCPU__DOT__m_Mux_ALU_out;
+    IData/*31:0*/ SingleCycleCPU__DOT__m_Mux_ALU_out_A;
+    IData/*31:0*/ SingleCycleCPU__DOT__m_Mux_ALU_out_B;
     IData/*31:0*/ SingleCycleCPU__DOT__m_ALU_ALUOut;
     IData/*31:0*/ SingleCycleCPU__DOT__m_DataMemory_readData;
     IData/*31:0*/ SingleCycleCPU__DOT__m_Mux_WriteData_out;
