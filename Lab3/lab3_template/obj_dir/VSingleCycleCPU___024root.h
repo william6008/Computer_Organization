@@ -22,20 +22,21 @@ class alignas(VL_CACHE_LINE_BYTES) VSingleCycleCPU___024root final : public Veri
     CData/*3:0*/ SingleCycleCPU__DOT__m_ALUCtrl_ALUCtl;
     CData/*0:0*/ SingleCycleCPU__DOT__m_ALU_zero;
     CData/*2:0*/ SingleCycleCPU__DOT____Vcellinp__m_Control__funct3;
-    CData/*6:0*/ SingleCycleCPU__DOT____Vcellinp__m_Control__opcode;
     CData/*4:0*/ SingleCycleCPU__DOT____Vcellinp__m_Register__writeReg;
+    CData/*4:0*/ SingleCycleCPU__DOT____Vcellinp__m_Register__readReg2;
+    CData/*4:0*/ SingleCycleCPU__DOT____Vcellinp__m_Register__readReg1;
     CData/*0:0*/ SingleCycleCPU__DOT__m_Control__DOT__branch;
-    CData/*7:0*/ __VdfgTmp_h97e7b328__0;
-    CData/*6:0*/ __Vdlyvdim0__SingleCycleCPU__DOT__m_DataMemory__DOT__data_memory__v0;
-    CData/*7:0*/ __Vdlyvval__SingleCycleCPU__DOT__m_DataMemory__DOT__data_memory__v0;
-    CData/*0:0*/ __Vdlyvset__SingleCycleCPU__DOT__m_DataMemory__DOT__data_memory__v0;
-    CData/*6:0*/ __Vdlyvdim0__SingleCycleCPU__DOT__m_DataMemory__DOT__data_memory__v1;
-    CData/*7:0*/ __Vdlyvval__SingleCycleCPU__DOT__m_DataMemory__DOT__data_memory__v1;
-    CData/*6:0*/ __Vdlyvdim0__SingleCycleCPU__DOT__m_DataMemory__DOT__data_memory__v2;
-    CData/*7:0*/ __Vdlyvval__SingleCycleCPU__DOT__m_DataMemory__DOT__data_memory__v2;
-    CData/*6:0*/ __Vdlyvdim0__SingleCycleCPU__DOT__m_DataMemory__DOT__data_memory__v3;
-    CData/*7:0*/ __Vdlyvval__SingleCycleCPU__DOT__m_DataMemory__DOT__data_memory__v3;
-    CData/*0:0*/ __Vdlyvset__SingleCycleCPU__DOT__m_DataMemory__DOT__data_memory__v4;
+    CData/*6:0*/ SingleCycleCPU__DOT__m_ImmGen__DOT__opcode;
+    CData/*7:0*/ __VdlyVal__SingleCycleCPU__DOT__m_DataMemory__DOT__data_memory__v0;
+    CData/*6:0*/ __VdlyDim0__SingleCycleCPU__DOT__m_DataMemory__DOT__data_memory__v0;
+    CData/*0:0*/ __VdlySet__SingleCycleCPU__DOT__m_DataMemory__DOT__data_memory__v0;
+    CData/*7:0*/ __VdlyVal__SingleCycleCPU__DOT__m_DataMemory__DOT__data_memory__v1;
+    CData/*6:0*/ __VdlyDim0__SingleCycleCPU__DOT__m_DataMemory__DOT__data_memory__v1;
+    CData/*7:0*/ __VdlyVal__SingleCycleCPU__DOT__m_DataMemory__DOT__data_memory__v2;
+    CData/*6:0*/ __VdlyDim0__SingleCycleCPU__DOT__m_DataMemory__DOT__data_memory__v2;
+    CData/*7:0*/ __VdlyVal__SingleCycleCPU__DOT__m_DataMemory__DOT__data_memory__v3;
+    CData/*6:0*/ __VdlyDim0__SingleCycleCPU__DOT__m_DataMemory__DOT__data_memory__v3;
+    CData/*0:0*/ __VdlySet__SingleCycleCPU__DOT__m_DataMemory__DOT__data_memory__v4;
     CData/*0:0*/ __VstlFirstIteration;
     CData/*0:0*/ __Vtrigprevexpr___TOP__clk__0;
     CData/*0:0*/ __Vtrigprevexpr___TOP__start__0;
@@ -43,7 +44,7 @@ class alignas(VL_CACHE_LINE_BYTES) VSingleCycleCPU___024root final : public Veri
     CData/*0:0*/ __VactDidInit;
     CData/*0:0*/ __VactContinue;
     SData/*10:0*/ SingleCycleCPU__DOT__m_Control__DOT__ctrl_signals;
-    SData/*15:0*/ __VdfgTmp_hcc8674fb__0;
+    SData/*15:0*/ __VdfgRegularize_hd87f99a1_0_1;
     IData/*31:0*/ SingleCycleCPU__DOT__m_PC_pc_o;
     IData/*31:0*/ SingleCycleCPU__DOT__m_InstMem_inst;
     IData/*31:0*/ SingleCycleCPU__DOT__m_Register_readData1;
@@ -55,8 +56,6 @@ class alignas(VL_CACHE_LINE_BYTES) VSingleCycleCPU___024root final : public Veri
     IData/*31:0*/ SingleCycleCPU__DOT__m_ALU_ALUOut;
     IData/*31:0*/ SingleCycleCPU__DOT__m_DataMemory_readData;
     IData/*31:0*/ SingleCycleCPU__DOT__m_Mux_WriteData_out;
-    IData/*31:0*/ __VdfgTmp_hedd66a4b__0;
-    IData/*23:0*/ __VdfgTmp_h86e2f243__0;
     IData/*31:0*/ __Vtrigprevexpr___TOP__SingleCycleCPU__DOT__m_ALU_ALUOut__0;
     IData/*31:0*/ __VactIterCount;
     VL_OUT(r[32],31,0);
@@ -65,8 +64,8 @@ class alignas(VL_CACHE_LINE_BYTES) VSingleCycleCPU___024root final : public Veri
     VlUnpacked<CData/*7:0*/, 128> SingleCycleCPU__DOT__m_DataMemory__DOT__data_memory;
     VlUnpacked<CData/*0:0*/, 4> __Vm_traceActivity;
     VlTriggerVec<1> __VstlTriggered;
-    VlTriggerVec<3> __VactTriggered;
-    VlTriggerVec<3> __VnbaTriggered;
+    VlTriggerVec<5> __VactTriggered;
+    VlTriggerVec<5> __VnbaTriggered;
 
     // INTERNAL VARIABLES
     VSingleCycleCPU__Syms* const vlSymsp;

@@ -16,7 +16,7 @@ We also privide template for forwarding unit and harazard detection unit
 
 ## Reference Architecture
 As long as it works successfully, it is not necessary to implement it according to the architecture diagram.
-![image](https://github.com/nycu-caslab/CO2025/blob/main/Lab4/CO_Lab4_architecture.png)
+![image](CO_Lab4_architecture.png)
 
 
 ## Hazard Dectection Unit
@@ -60,8 +60,8 @@ Please submit your source code as a zip file to **E3**.
 The name of the zip file should be <student_id>.zip, and the structure of the file should be as the following:
 
 ```
-<stduent_id>.zip
-    |- <student_id>/
+lab4_<stduent_id>.zip
+    |- lab4_<student_id>/
         |- ...(your source codes)
 ```
 

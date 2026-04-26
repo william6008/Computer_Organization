@@ -17,7 +17,7 @@ VSingleCycleCPU___024root::VSingleCycleCPU___024root(VSingleCycleCPU__Syms* syms
 }
 
 void VSingleCycleCPU___024root::__Vconfigure(bool first) {
-    if (false && first) {}  // Prevent unused
+    (void)first;  // Prevent unused variable warning
 }
 
 VSingleCycleCPU___024root::~VSingleCycleCPU___024root() {
