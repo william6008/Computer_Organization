@@ -26,14 +26,20 @@ wire [1:0] reg2_mem_to_reg, reg2_ALUop, reg3_mem_to_reg, reg4_mem_to_reg;
 wire [2:0] reg2_funct3;
 wire reg2_memWrite, reg2_memRead, reg2_ALUSrc, reg2_regWrite, reg2_funct7, isU, reg2_isU, reg3_memWrite, reg3_memRead, reg3_regWrite, reg4_regWrite; 
 
-wire Flush_HD, RePC;
-wire id_ForwardA_out, id_ForwardB_out, ex_ForwardA_out, ex_ForwardB_out;
+// add by myself
+wire Flush_HD_out, RePC_out;
+wire id_ForwardA_out, id_ForwardB_out;
+wire [1:0]ex_ForwardA_out, ex_ForwardB_out;
 wire [31:0] rd1_mux_out, rd2_mux_out, ALUSrc_mux_ex_ForwardA_out, ALUSrc_mux_ex_ForwardB_out; 
+wire [4:0] reg2_readReg1, reg2_readReg2;
+
+wire Flush_ctrl_out;
+wire [31:0] RePC_mux_out;
 
 PC m_PC(
     .clk(clk),
     .rst(start),
-    .pc_i(pc_mux_out),
+    .pc_i(RePC_mux_out),
     .pc_o(pc_out)
 );
 Adder m_Adder_1(
@@ -51,6 +57,8 @@ IF_ID_Reg IF_ID_reg(
     .pc_i(pc_out),
     .pc_4_i(pc_plus4),
     .inst_i(ins_out),
+    .Flush_HD(Flush_HD_out),
+    .Flush_ctrl(Flush_ctrl_out),
     .pc_o(reg1_pc_o),
     .pc_4_o(reg1_pc_4_o),
     .inst_o(reg1_inst_out)
@@ -67,7 +75,8 @@ Control m_Control(
     .ALUSrc(ALUSrc),
     .isUtype(isU),
     .regWrite(regWrite),
-    .PCSel(PCSel)
+    .PCSel(PCSel),
+    .Flush_ctrl(Flush_ctrl_out)
 );
 ID_EX_Reg ID_EX_reg(
     .clk(clk),
@@ -87,6 +96,9 @@ ID_EX_Reg ID_EX_reg(
     .rd1_i(readData1),
     .rd2_i(readData2),
     .imm_i(imm),
+    .readReg1_i(reg1_inst_out[19:15]),
+    .readReg2_i(reg1_inst_out[24:20]),
+    .Flush_HD(Flush_HD_out),
     .mem_to_reg_o(reg2_mem_to_reg),
     .ALUop_o(reg2_ALUop),
     .memWrite_o(reg2_memWrite),
@@ -101,7 +113,9 @@ ID_EX_Reg ID_EX_reg(
     .writeReg_o(reg2_writeReg),
     .rd1_o(reg2_rd1),
     .rd2_o(reg2_rd2),
-    .imm_o(reg2_imm)
+    .imm_o(reg2_imm),
+    .readReg1_o(reg2_readReg1),
+    .readReg2_o(reg2_readReg2)
 );
 
 // For Student:
@@ -126,8 +140,8 @@ assign r = m_Register.regs;
 // ======= for vaildation =======
 
 BranchComp m_BranchComp(
-    .A(readData1),
-    .B(readData2),
+    .A(rd1_mux_out),
+    .B(rd2_mux_out),
     .BrEq(Breq),
     .BrLT(Brlt)
 );
@@ -157,7 +171,7 @@ Mux3to1 #(.size(32)) m_Mux_PC(
 
 Mux2to1 #(.size(32)) m_Mux_ALU(
     .sel(reg2_ALUSrc),
-    .s0(reg2_rd2),
+    .s0(ALUSrc_mux_ex_ForwardB_out),
     .s1(reg2_imm),
     .out(ALUmux_out)
 );
@@ -174,7 +188,7 @@ ALU m_ALU(
     .ALUctl(ALUCtrl),
     .pc(reg2_pc),
     .isUtype(reg2_isU),
-    .A(reg2_rd1),
+    .A(ALUSrc_mux_ex_ForwardA_out),
     .B(ALUmux_out),
     .ALUOut(ALUOut),
     .zero(zero)
@@ -190,7 +204,7 @@ EX_MEM_Reg EX_MEM_reg(
     .pc_4_i(reg2_pc_4),
     .writeReg_i(reg2_writeReg),
     .ALU_result_i(ALUOut),
-    .rd2_i(reg2_rd2),
+    .rd2_i(ALUSrc_mux_ex_ForwardB_out),
     .mem_to_reg_o(reg3_mem_to_reg),
     .memWrite_o(reg3_memWrite),
     .memRead_o(reg3_memRead),
@@ -239,8 +253,8 @@ Mux3to1 #(.size(32)) m_Mux_WriteData(
 Forwarding_Unit Forwarding_Unit(
     .id_R1(reg1_inst_out[19:15]),
     .id_R2(reg1_inst_out[24:20]),
-    .ex_R1(),
-    .ex_R2(),
+    .ex_R1(reg2_readReg1),
+    .ex_R2(reg2_readReg2),
     .mem_Rd(reg3_writeReg),
     .wb_Rd(reg4_writeReg),
     .mem_RegWrite(reg3_regWrite),
@@ -252,43 +266,50 @@ Forwarding_Unit Forwarding_Unit(
 );
 
 Mux2to1 m_Mux_Rd1(
-    .sel(id_ForwardA),
-    .s1(readData1),
-    .s2(reg3_ALUResult),
+    .sel(id_ForwardA_out),
+    .s0(readData1),
+    .s1(reg3_ALUResult),
     .out(rd1_mux_out)
 );
 
 Mux2to1 m_Mux_Rd2(
-    .sel(id_ForwardB),
-    .s1(readData2),
-    .s2(reg3_ALUResult),
+    .sel(id_ForwardB_out),
+    .s0(readData2),
+    .s1(reg3_ALUResult),
     .out(rd2_mux_out)
 );
 
 Mux3to1 m_Mux_ex_ForwardA(
     .sel(ex_ForwardA_out),
-    .s1(reg2_rd1),
-    .s2(writeData),
-    .s3(reg3_ALUResult),
+    .s0(reg2_rd1),
+    .s1(writeData),
+    .s2(reg3_ALUResult),
     .out(ALUSrc_mux_ex_ForwardA_out)
 );
 
 Mux3to1 m_Mux_ex_ForwardB(
     .sel(ex_ForwardB_out),
-    .s1(reg2_rd2),
-    .s2(writeData),
-    .s3(reg3_ALUResult),
+    .s0(reg2_rd2),
+    .s1(writeData),
+    .s2(reg3_ALUResult),
     .out(ALUSrc_mux_ex_ForwardB_out)
 );
 
 HazardDetection HazardDetection(
-    .id_R1(),      
-    .id_R2(),      
-    .x_Rd(),       
-    .mem_Rd(),       
-    .mem_MemRead(),
-    .RePC(),             
-    .Flush_HD()  
+    .id_R1(reg1_inst_out[19:15]),      
+    .id_R2(reg1_inst_out[24:20]),      
+    .ex_Rd(reg2_writeReg),       
+    //.mem_Rd(),       
+    .ex_MemRead(reg2_memRead),
+    .RePC(RePC_out),             
+    .Flush_HD(Flush_HD_out)  
+);
+
+Mux2to1 m_Mux_Repc(
+    .sel(RePC_out),
+    .s0(pc_mux_out),
+    .s1(reg1_pc_o),
+    .out(RePC_mux_out)
 );
 
 endmodule

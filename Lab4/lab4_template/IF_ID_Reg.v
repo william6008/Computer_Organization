@@ -4,6 +4,8 @@ module IF_ID_Reg (
     input wire [31:0] pc_i,
     input wire [31:0] pc_4_i,
     input wire [31:0] inst_i,
+    input wire Flush_HD,
+    input wire Flush_ctrl,
     output reg [31:0] pc_o,
     output reg [31:0] pc_4_o,
     output reg [31:0] inst_o
@@ -22,10 +24,14 @@ module IF_ID_Reg (
     // Choose the design approach that best suits your needs.
 
     always @(posedge clk, negedge rst) begin
-        if(~rst) begin
+        if (~rst ) begin
             pc_o <= pc_o;
             pc_4_o <= pc_4_o;
             inst_o <= inst_o;
+        end else if (Flush_ctrl || Flush_HD) begin 
+            pc_o <= 32'b0;
+            pc_4_o <= 32'b0;
+            inst_o <= 32'b0;
         end
         else begin
             inst_o <= inst_i;

@@ -19,6 +19,10 @@ module ID_EX_Reg (
     input wire [31:0] rd2_i,
     input wire [31:0] imm_i,
 
+    input wire [4:0] readReg1_i,
+    input wire [4:0] readReg2_i,
+    input wire Flush_HD,
+
     output reg [1:0] mem_to_reg_o,
     output reg [1:0] ALUop_o,
     output reg memWrite_o,
@@ -34,7 +38,10 @@ module ID_EX_Reg (
     output reg [4:0] writeReg_o,
     output reg [31:0] rd1_o,
     output reg [31:0] rd2_o,
-    output reg [31:0] imm_o
+    output reg [31:0] imm_o,
+
+    output reg [4:0] readReg1_o,
+    output reg [4:0] readReg2_o
 );
 
     always @(posedge clk or negedge rst) begin
@@ -54,7 +61,28 @@ module ID_EX_Reg (
             rd2_o <= rd2_o;
             imm_o <= imm_o;
             isU_o <= isU_o;
+            readReg1_o <= readReg1_o;
+            readReg2_o <= readReg2_o;
         end 
+        else if (Flush_HD) begin
+            mem_to_reg_o <= 2'b0;
+            ALUop_o <= 2'b0;
+            memWrite_o <= 1'b0;
+            memRead_o <= 1'b0;
+            ALUSrc_o <= 1'b0;
+            regWrite_o <= 1'b0;
+            funct7_o <= 1'b0;
+            funct3_o <= 3'b0;
+            pc_o <= 32'b0;
+            pc_4_o <= 32'b0;
+            writeReg_o <= 5'b0;
+            rd1_o <= 32'b0;
+            rd2_o <= 32'b0;
+            imm_o <= 32'b0;
+            isU_o <= 1'b0;
+            readReg1_o <= 5'b0;
+            readReg2_o <= 5'b0;
+        end
         else begin
             mem_to_reg_o <= mem_to_reg_i;
             ALUop_o <= ALUop_i;
@@ -71,6 +99,8 @@ module ID_EX_Reg (
             imm_o <= imm_i;
             pc_o <= pc_i;
             isU_o <= isU_i;
+            readReg1_o <= readReg1_i;
+            readReg2_o <= readReg2_i;
         end
     end
 

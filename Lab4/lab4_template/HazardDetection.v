@@ -2,8 +2,8 @@ module HazardDetection(
     input wire [4:0] id_R1,      // Source register 1 in ID stage
     input wire [4:0] id_R2,      // Source register 2 in ID stage
     input wire [4:0] ex_Rd,       // Destination register in EX stage
-    input wire [4:0] mem_Rd,       // Destination register in MEM stage
-    input wire mem_MemRead,
+    //input wire [4:0] mem_Rd,       // Destination register in MEM stage
+    input wire ex_MemRead,
     output reg RePC,             // re-fetch the flushed instruction
     output reg Flush_HD    // flush IF/ID reg & ID/EX reg
 );
@@ -22,12 +22,14 @@ module HazardDetection(
     // Data hazards can arise when a branch instruction depends on the result of previous instructions,
     // such as when the values being compared in a branch are not yet computed.
     // In such cases, if forwarding cannot resolve the hazard, you may need to insert a stall to avoid incorrect execution.
-    always @(*) begin
-        RePC = 1'b0;
-        Flush_HD = 1'b0;
-        if (mem_MemRead && ((ex_Rd == id_R1) || (ex_Rd == id_R2))) begin
+
+    always @(*) begin        
+        if (ex_MemRead && ((ex_Rd == id_R1) || (ex_Rd == id_R2))) begin
             RePC = 1'b1;
             Flush_HD = 1'b1;
+        end else begin
+            RePC = 1'b0;
+            Flush_HD = 1'b0;
         end
     end
 

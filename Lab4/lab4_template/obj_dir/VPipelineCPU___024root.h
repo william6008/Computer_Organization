@@ -38,8 +38,14 @@ class alignas(VL_CACHE_LINE_BYTES) VPipelineCPU___024root final : public Verilat
         CData/*0:0*/ PipelineCPU__DOT__reg3_memWrite;
         CData/*0:0*/ PipelineCPU__DOT__reg3_regWrite;
         CData/*0:0*/ PipelineCPU__DOT__reg4_regWrite;
+        CData/*0:0*/ PipelineCPU__DOT__Flush_HD_out;
+        CData/*0:0*/ PipelineCPU__DOT__id_ForwardA_out;
+        CData/*0:0*/ PipelineCPU__DOT__id_ForwardB_out;
+        CData/*1:0*/ PipelineCPU__DOT__ex_ForwardA_out;
+        CData/*1:0*/ PipelineCPU__DOT__ex_ForwardB_out;
+        CData/*4:0*/ PipelineCPU__DOT__reg2_readReg1;
+        CData/*4:0*/ PipelineCPU__DOT__reg2_readReg2;
         CData/*0:0*/ __Vdly__PipelineCPU__DOT__reg3_memRead;
-        CData/*1:0*/ __Vdly__PipelineCPU__DOT__reg4_mem_to_reg;
         CData/*0:0*/ __Vdly__PipelineCPU__DOT__reg4_regWrite;
         CData/*4:0*/ __Vdly__PipelineCPU__DOT__reg4_writeReg;
         CData/*7:0*/ __VdlyVal__PipelineCPU__DOT__m_DataMemory__DOT__data_memory__v0;
@@ -58,9 +64,10 @@ class alignas(VL_CACHE_LINE_BYTES) VPipelineCPU___024root final : public Verilat
         CData/*0:0*/ __Vtrigprevexpr___TOP__PipelineCPU__DOT__reg3_memRead__0;
         CData/*0:0*/ __VactDidInit;
         CData/*0:0*/ __VactContinue;
-        SData/*10:0*/ PipelineCPU__DOT__m_Control__DOT__ctrl;
+        SData/*11:0*/ PipelineCPU__DOT__m_Control__DOT__ctrl;
         IData/*31:0*/ PipelineCPU__DOT__pc_mux_out;
         IData/*31:0*/ PipelineCPU__DOT__pc_out;
+        IData/*31:0*/ PipelineCPU__DOT__writeData;
         IData/*31:0*/ PipelineCPU__DOT__imm;
         IData/*31:0*/ PipelineCPU__DOT__ALUmux_out;
         IData/*31:0*/ PipelineCPU__DOT__memRead_out;
@@ -73,18 +80,19 @@ class alignas(VL_CACHE_LINE_BYTES) VPipelineCPU___024root final : public Verilat
         IData/*31:0*/ PipelineCPU__DOT__reg2_rd1;
         IData/*31:0*/ PipelineCPU__DOT__reg2_rd2;
         IData/*31:0*/ PipelineCPU__DOT__reg2_imm;
+    };
+    struct {
         IData/*31:0*/ PipelineCPU__DOT__reg3_pc_4;
         IData/*31:0*/ PipelineCPU__DOT__reg3_ALUResult;
         IData/*31:0*/ PipelineCPU__DOT__reg3_rd2;
         IData/*31:0*/ PipelineCPU__DOT__reg4_pc_4;
         IData/*31:0*/ PipelineCPU__DOT__reg4_ALUResult;
         IData/*31:0*/ PipelineCPU__DOT__reg4_readDataResult;
+        IData/*31:0*/ PipelineCPU__DOT__rd1_mux_out;
+        IData/*31:0*/ PipelineCPU__DOT__rd2_mux_out;
+        IData/*31:0*/ PipelineCPU__DOT__ALUSrc_mux_ex_ForwardA_out;
+        IData/*31:0*/ PipelineCPU__DOT__ALUSrc_mux_ex_ForwardB_out;
         IData/*31:0*/ __Vdly__PipelineCPU__DOT__reg3_ALUResult;
-    };
-    struct {
-        IData/*31:0*/ __Vdly__PipelineCPU__DOT__reg4_pc_4;
-        IData/*31:0*/ __Vdly__PipelineCPU__DOT__reg4_ALUResult;
-        IData/*31:0*/ __Vdly__PipelineCPU__DOT__reg4_readDataResult;
         IData/*31:0*/ __Vtrigprevexpr___TOP__PipelineCPU__DOT__reg3_ALUResult__0;
         IData/*31:0*/ __VactIterCount;
         VL_OUT(r[32],31,0);

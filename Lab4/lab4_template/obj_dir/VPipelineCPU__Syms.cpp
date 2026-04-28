@@ -18,7 +18,7 @@ VPipelineCPU__Syms::VPipelineCPU__Syms(VerilatedContext* contextp, const char* n
     , TOP{this, namep}
 {
         // Check resources
-        Verilated::stackCheck(116);
+        Verilated::stackCheck(118);
     // Configure time unit / time precision
     _vm_contextp__->timeunit(-12);
     _vm_contextp__->timeprecision(-12);
