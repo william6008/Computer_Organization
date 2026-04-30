@@ -800,7 +800,7 @@ VL_INLINE_OPT void VPipelineCPU___024root___nba_sequent__TOP__3(VPipelineCPU___0
                                          ? 1U : 0U);
 }
 
-extern const VlUnpacked<SData/*11:0*/, 4096> VPipelineCPU__ConstPool__TABLE_he85b8471_0;
+extern const VlUnpacked<SData/*11:0*/, 4096> VPipelineCPU__ConstPool__TABLE_h75aa1d6c_0;
 
 VL_INLINE_OPT void VPipelineCPU___024root___nba_comb__TOP__0(VPipelineCPU___024root* vlSelf) {
     (void)vlSelf;  // Prevent unused variable warning
@@ -832,7 +832,7 @@ VL_INLINE_OPT void VPipelineCPU___024root___nba_comb__TOP__0(VPipelineCPU___024r
                                               | (0x7fU 
                                                  & vlSelfRef.PipelineCPU__DOT__reg1_inst_out))));
     vlSelfRef.PipelineCPU__DOT__m_Control__DOT__ctrl 
-        = VPipelineCPU__ConstPool__TABLE_he85b8471_0
+        = VPipelineCPU__ConstPool__TABLE_h75aa1d6c_0
         [__Vtableidx1];
     vlSelfRef.PipelineCPU__DOT__pc_mux_out = ((0U == 
                                                (3U 
