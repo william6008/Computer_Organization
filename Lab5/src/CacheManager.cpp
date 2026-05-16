@@ -11,10 +11,10 @@ CacheManager::CacheManager(Memory *memory, Cache *cache){
     size = cache->get_size();
 
     // [Example] Set block size to 4. You MUST change this to 16.
-    cache->set_block_size(4); 
+    cache->set_block_size(16); 
     
     // [Example] Tag bits for direct-mapped. Needs recalculation for 2-way.
-    tag_bits = 32 - (int)log2(cache->get_len()) - 2;
+    tag_bits = 32 - (int)log2(cache->get_len() / 2) - 4;
 };
 
 CacheManager::~CacheManager(){
