@@ -3,6 +3,7 @@
 #include "Cache.h"
 #include "Memory.h"
 
+#include <vector>
 
 class CacheManager
 {
@@ -21,7 +22,9 @@ private:
     Cache *cache;
     unsigned int size;       // bytes
     unsigned int tag_bits;
-    std::pair<unsigned, unsigned> directed_map(unsigned int addr);
+    std::tuple<unsigned, unsigned, unsigned> directed_map(unsigned int addr);
+    
+    std::vector<int> mru;
 
 public:
 

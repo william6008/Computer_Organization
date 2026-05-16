@@ -12,28 +12,39 @@ CacheManager::CacheManager(Memory *memory, Cache *cache){
 
     // [Example] Set block size to 4. You MUST change this to 16.
     cache->set_block_size(16); 
+
+    mru.assign(cache->get_len() / 2, 0);
     
     // [Example] Tag bits for direct-mapped. Needs recalculation for 2-way.
-    tag_bits = 32 - (int)log2(cache->get_len() / 2) - 4;
+    tag_bits = 32 - ((int)log2(cache->get_len()) - 1) - 4;
 };
 
 CacheManager::~CacheManager(){
 
 };
 
-std::pair<unsigned, unsigned> CacheManager::directed_map(unsigned int addr){
+std::tuple<unsigned, unsigned, unsigned> CacheManager::directed_map(unsigned int addr){
     // [Example] Logic for block size = 4
-    unsigned int index_bit = int(log2(cache->get_len()));
-    unsigned int index = (addr >> 2) % cache->get_len(); 
-    unsigned int tag = addr >> index_bit >> 2;
-    return {index, tag};
+    unsigned int index_bit = int(log2(cache->get_len()) - 1);
+    unsigned int index = (addr >> 4) % (cache->get_len() / 2); 
+    unsigned int tag = addr >> index_bit >> 4;
+    
+    unsigned int offset = addr % 16;
+    return {index, tag, offset};
 }
 
 unsigned int* CacheManager::find(unsigned int addr){
     // Check if addr is in cache, return pointer to the data if hit, else nullptr.
-    auto [index, tag] = directed_map(addr);
-    if((*cache)[index].tag == tag)
-        return &((*cache)[index][0]);
+    auto [index, tag, offset] = directed_map(addr);
+    int word_addr = offset / 4;
+    if((*cache)[2 * index + 0].tag == tag) {
+        mru[index] = 0;
+        return &((*cache)[2 * index + 0][word_addr]);
+    }
+    else if ((*cache)[2 * index + 1].tag == tag) {
+        mru[index] = 1;
+        return &((*cache)[2 * index + 1][word_addr]);
+    }
     else
         return nullptr;
 }
@@ -45,16 +56,21 @@ unsigned int CacheManager::read(unsigned int addr){
         return *value_ptr; // Cache Hit
     } else {
         // Cache Miss
-        auto [index, tag] = directed_map(addr);
-        
+        auto [index, tag, offset] = directed_map(addr);
+        int word_addr = offset / 4;
+        int target = 1 - mru[index];
+
         // Update Metadata
-        (*cache)[index].tag = tag;
+        (*cache)[2 * index + target].tag = tag;
         
         // Fetch from memory and store in cache
-        unsigned int data = memory->read(addr);
-        (*cache)[index][0] = data;
+        int addr_head = addr - offset;
+        for (int i = 0; i < 4; i++) {
+            (*cache)[2 * index + target][i] = memory->read(addr_head + 4 * i);
+        }
         
-        return data;
+        mru[index] = target;
+        return (*cache)[2 * index + target][word_addr];
     }
 };
 
@@ -69,10 +85,13 @@ void CacheManager::write(unsigned int addr, unsigned value){
     else {
         // Write Miss: Write-allocate policy
         // You should treat this as a MISS and load the block into cache
-        auto [index, tag] = directed_map(addr);
-        
-        (*cache)[index].tag = tag;
-        (*cache)[index][0] = value; // In reality, you should load the whole block first
+        read(addr);
+        auto [index, tag, offset] = directed_map(addr);
+        int word_addr = offset / 4;
+
+        int target = mru[index];
+        (*cache)[2 * index + target].tag = tag;
+        (*cache)[2 * index + target][word_addr] = value; // In reality, you should load the whole block first
     }
     
     // Always sync with memory for simplicity in this example
