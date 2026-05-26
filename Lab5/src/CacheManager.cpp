@@ -1,5 +1,6 @@
 #include "CacheManager.h"
 #include <math.h>
+#include <tuple>
 
 // This is an example of direct-mapped cache manager implementation with block size 4 bytes.
 // Note: This is ONLY a template. You MUST modify it to 2-way set associative, 

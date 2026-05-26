@@ -4,6 +4,7 @@
 #include "Memory.h"
 
 #include <vector>
+#include <tuple>
 
 class CacheManager
 {
