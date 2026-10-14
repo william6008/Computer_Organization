@@ -14,7 +14,7 @@ module PipelineCPU (
 // The following provides simple template,
 // you can modify it as you wish except I/O pin and register module
 
-wire [31:0] pc_mux_out, pc_out, pc_plus4, ins_out, writeData, readData1, readData2, imm, imm_shift, adder2_sum, ALUmux_out, memRead_out, ALUOut;
+wire [31:0] pc_mux_out, pc_out, pc_plus4, ins_out, writeData, readData1, readData2, imm, imm_shift, adder2_sum, jalr_sum, jalr_target, ALUmux_out, memRead_out, ALUOut;
 wire [3:0] ALUCtrl;
 wire [1:0] memtoReg, ALUOp, PCSel;
 wire Brlt, Breq, memRead, memWrite, ALUSrc, regWrite, zero;
@@ -160,11 +160,22 @@ Adder m_Adder_2(
     .b(imm),
     .sum(adder2_sum)
 );
+
+// JALR is resolved in the ID stage, just like the branches.  ALUOut belongs
+// to the instruction currently in EX, so it must not be used as JALR's PC.
+// Use the forwarded ID-stage rs1 value and clear bit 0 as required by RISC-V.
+Adder m_Adder_JALR(
+    .a(rd1_mux_out),
+    .b(imm),
+    .sum(jalr_sum)
+);
+assign jalr_target = {jalr_sum[31:1], 1'b0};
+
 Mux3to1 #(.size(32)) m_Mux_PC(
     .sel(PCSel),
     .s0(pc_plus4),
     .s1(adder2_sum),
-    .s2(ALUOut),
+    .s2(jalr_target),
     .out(pc_mux_out)
 );
 
@@ -296,11 +307,14 @@ Mux3to1 m_Mux_ex_ForwardB(
 );
 
 HazardDetection HazardDetection(
+    .id_opcode(reg1_inst_out[6:0]),
     .id_R1(reg1_inst_out[19:15]),      
     .id_R2(reg1_inst_out[24:20]),      
-    .ex_Rd(reg2_writeReg),       
-    //.mem_Rd(),       
+    .ex_Rd(reg2_writeReg),
+    .mem_Rd(reg3_writeReg),
     .ex_MemRead(reg2_memRead),
+    .ex_RegWrite(reg2_regWrite),
+    .mem_MemRead(reg3_memRead),
     .RePC(RePC_out),             
     .Flush_HD(Flush_HD_out)  
 );
